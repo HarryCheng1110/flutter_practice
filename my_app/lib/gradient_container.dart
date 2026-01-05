@@ -6,9 +6,16 @@ const startAlignment = Alignment.topLeft;
 const endAlignment = Alignment.bottomRight;
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key, required this.colors});
+  GradientContainer({super.key, required this.colors});
 
   final List<Color> colors;
+
+  var activeDiceImage = 'assets/images/dice-1.png';
+
+  void rollDice() {
+    activeDiceImage = 'assets/images/dice-3.png';
+    print('chaging image...');
+  }
 
   @override
   Widget build(context) {
@@ -21,7 +28,22 @@ class GradientContainer extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: StyleText("Hello world from argument!!"),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(activeDiceImage, width: 200),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: rollDice,
+              style: TextButton.styleFrom(
+                // padding: const EdgeInsets.only(top: 20),
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 28),
+              ),
+              child: const StyleText('Roll'),
+            ),
+          ],
+        ),
       ),
     );
   }
